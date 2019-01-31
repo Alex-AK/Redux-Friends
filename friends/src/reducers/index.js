@@ -4,7 +4,10 @@ import {
   GET_FRIENDS_FAILED,
   DELETE_FRIENDS,
   DELETE_FRIENDS_COMPLETED,
-  DELETE_FRIENDS_FAILED
+  DELETE_FRIENDS_FAILED,
+  ADD_FRIENDS,
+  ADD_FRIENDS_COMPLETED,
+  ADD_FRIENDS_FAILED
 } from '../actions';
 
 const initialState = {
@@ -34,8 +37,6 @@ export const rootReducer = (state = initialState, action) => {
         isLoading: false,
         error: 'It broke.'
       };
-    default:
-      return state;
     case DELETE_FRIENDS:
       return {
         ...state,
@@ -55,5 +56,26 @@ export const rootReducer = (state = initialState, action) => {
         isLoading: false,
         error: 'It broke.'
       };
+    case ADD_FRIENDS:
+      return {
+        ...state,
+        error: '',
+        isLoading: true
+      };
+    case ADD_FRIENDS_COMPLETED:
+      return {
+        ...state,
+        friends: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case ADD_FRIENDS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: 'It broke.'
+      };
+    default:
+      return state;
   }
 };
