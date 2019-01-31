@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
-const Navigation = () => {
-  return (
-    <>
-      <nav>
-        <h1 className="logo">Friends</h1>
-        <div className="right-nav">
-          <NavLink to="/">View Friends</NavLink>
-          <NavLink to="/add-friend">Add Friend</NavLink>
-        </div>
-      </nav>
-    </>
-  );
+class Navigation extends Component {
+  render() {
+    return (
+      <>
+        <nav>
+          <div className="logo-loader">
+            <h1 className="logo">Friends</h1>
+            {this.props.isLoading && (
+              <Loader type="TailSpin" color="grey" height="20" />
+            )}
+          </div>
+          <div className="right-nav">
+            <NavLink to="/">View Friends</NavLink>
+            <NavLink to="/add-friend">Add Friend</NavLink>
+          </div>
+        </nav>
+      </>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isLoading: state.isLoading
+  };
 };
 
-export default Navigation;
+export default connect(
+  mapStateToProps,
+  {}
+)(Navigation);

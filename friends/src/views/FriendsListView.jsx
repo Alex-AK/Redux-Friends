@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Loader from 'react-loader-spinner';
-import { getFriends } from '../actions';
 
-import FriendCard from '../components/FriendList';
+import { getFriends, deleteFriend } from '../actions';
+
+import FriendCard from '../components/FriendCard';
 
 export class FriendsListView extends Component {
   componentDidMount() {
     this.props.getFriends();
   }
 
+  deleteFriend = id => {
+    this.props.deleteFriend(id);
+  };
+
   render() {
     const friendsList = this.props.friends.map(friend => (
-      <FriendCard key={friend.id} friend={friend} />
+      <FriendCard
+        key={friend.id}
+        friend={friend}
+        deleteFriend={this.deleteFriend}
+      />
     ));
 
-    return this.props.isLoading ? (
-      <div className="loader">
-        <Loader type="TailSpin" color="grey" height="50" />
-      </div>
-    ) : (
-      <div className="friend-cards">{friendsList}</div>
-    );
+    return <div className="friend-cards">{friendsList}</div>;
   }
 }
 
@@ -32,5 +34,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFriends }
+  { getFriends, deleteFriend }
 )(FriendsListView);
