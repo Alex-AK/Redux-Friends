@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getFriends } from '../actions';
 
-export class FriendsContainer extends Component {
+import FriendList from '../components/FriendList';
+
+export class FriendsListView extends Component {
   state = {};
 
   componentDidMount() {
@@ -23,4 +25,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getFriends }
-)(FriendsContainer);
+)(FriendsListView);
