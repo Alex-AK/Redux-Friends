@@ -5,6 +5,8 @@ import FriendsListView from './views/FriendsListView';
 import NavigationView from './views/NavigationView';
 import FriendsFormView from './views/FriendFormView';
 
+import './styles/friends.css';
+
 class App extends Component {
   render() {
     return (

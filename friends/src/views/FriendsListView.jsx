@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getFriends } from '../actions';
 
-import FriendList from '../components/FriendList';
+import FriendCard from '../components/FriendList';
 
 export class FriendsListView extends Component {
-  state = {};
-
   componentDidMount() {
     this.props.getFriends();
   }
 
   render() {
-    return this.props.friends.map(friend => (
-      <h1 key={friend.id}>{friend.name}</h1>
+    const friendsList = this.props.friends.map(friend => (
+      <FriendCard key={friend.id} friend={friend} />
     ));
+
+    return <div className="friend-cards">{friendsList}</div>;
   }
 }
 
