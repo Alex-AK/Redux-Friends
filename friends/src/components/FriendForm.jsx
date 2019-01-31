@@ -21,10 +21,11 @@ class FriendsForm extends Component {
   addFriend = e => {
     e.preventDefault();
     this.props.addFriend(this.state.friend);
+    // redirect to view friends with `history.push('/')
+    this.props.history.push('/');
   };
 
   render() {
-    console.log(this.state.friend);
     return (
       <form className="friend-form" onSubmit={e => e.preventDefault()}>
         <input

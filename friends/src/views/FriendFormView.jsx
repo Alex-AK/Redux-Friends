@@ -8,7 +8,10 @@ class FriendFormView extends Component {
   render() {
     return (
       <div>
-        <FriendForm addFriend={this.props.addFriend} />
+        <FriendForm
+          addFriend={this.props.addFriend}
+          history={this.props.history}
+        />
       </div>
     );
   }
