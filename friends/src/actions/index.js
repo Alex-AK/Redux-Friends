@@ -11,10 +11,14 @@ export const getFriends = () => dispatch => {
   axios
     .get('http://localhost:5000/api/friends')
     .then(res =>
-      dispatch({
-        type: GET_FRIENDS_COMPLETED,
-        payload: res.data
-      })
+      setTimeout(
+        () =>
+          dispatch({
+            type: GET_FRIENDS_COMPLETED,
+            payload: res.data
+          }),
+        2000
+      )
     )
     .catch(err =>
       dispatch({

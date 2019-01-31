@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 import { getFriends } from '../actions';
 
 import FriendCard from '../components/FriendList';
@@ -14,12 +15,19 @@ export class FriendsListView extends Component {
       <FriendCard key={friend.id} friend={friend} />
     ));
 
-    return <div className="friend-cards">{friendsList}</div>;
+    return this.props.isLoading ? (
+      <div className="loader">
+        <Loader type="TailSpin" color="grey" height="50" />
+      </div>
+    ) : (
+      <div className="friend-cards">{friendsList}</div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  friends: state.friends
+  friends: state.friends,
+  isLoading: state.isLoading
 });
 
 export default connect(

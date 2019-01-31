@@ -1,3 +1,10 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 200px;
+}
+
 .friend-form {
   display: flex;
   justify-content: space-evenly;
