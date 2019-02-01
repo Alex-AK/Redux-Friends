@@ -21,13 +21,20 @@ class FriendsForm extends Component {
   addFriend = e => {
     e.preventDefault();
     this.props.addFriend(this.state.friend);
-    // redirect to view friends with `history.push('/')
+    this.props.history.push('/');
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.isEditing
+      ? this.props.editFriend(this.state.friend, this.props.friend.id)
+      : this.props.addFriend(this.state.friend);
     this.props.history.push('/');
   };
 
   render() {
     return (
-      <form className="friend-form" onSubmit={e => e.preventDefault()}>
+      <form className="friend-form" onSubmit={this.handleSubmit}>
         <input
           type="text"
           placeholder="Name"
@@ -55,8 +62,8 @@ class FriendsForm extends Component {
           required
           minLength="5"
         />
-        <button className="form-button button" onClick={this.addFriend}>
-          {this.props.isUpdating ? 'Update' : 'Add'}
+        <button className="form-button button">
+          {this.props.isEditing ? 'Update' : 'Add'}
         </button>
       </form>
     );

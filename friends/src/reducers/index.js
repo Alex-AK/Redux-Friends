@@ -7,13 +7,19 @@ import {
   DELETE_FRIENDS_FAILED,
   ADD_FRIENDS,
   ADD_FRIENDS_COMPLETED,
-  ADD_FRIENDS_FAILED
+  ADD_FRIENDS_FAILED,
+  EDIT_FRIEND,
+  EDIT_FRIEND_COMPLETED,
+  EDIT_FRIEND_FAILED,
+  OPEN_EDIT
 } from '../actions';
 
 const initialState = {
   friends: [],
   isLoading: false,
-  error: ''
+  error: '',
+  isEditing: false,
+  activeEdit: {}
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -70,6 +76,30 @@ export const rootReducer = (state = initialState, action) => {
         error: ''
       };
     case ADD_FRIENDS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: 'It broke.'
+      };
+    case OPEN_EDIT:
+      return {
+        ...state,
+        isEditing: true,
+        activeEdit: action.payload
+      };
+    case EDIT_FRIEND:
+      return {
+        ...state,
+        error: ''
+      };
+    case EDIT_FRIEND_COMPLETED:
+      return {
+        ...state,
+        friends: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case EDIT_FRIEND_FAILED:
       return {
         ...state,
         isLoading: false,

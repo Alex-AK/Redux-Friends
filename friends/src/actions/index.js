@@ -9,6 +9,10 @@ export const DELETE_FRIENDS_FAILED = 'DELETE_FRIENDS_FAILED';
 export const ADD_FRIENDS = 'ADD_FRIENDS';
 export const ADD_FRIENDS_COMPLETED = 'ADD_FRIENDS_COMPLETED';
 export const ADD_FRIENDS_FAILED = 'ADD_FRIENDS_FAILED';
+export const EDIT_FRIEND = 'EDIT_FRIENDS';
+export const EDIT_FRIEND_COMPLETED = 'EDIT_FRIENDS_COMPLETED';
+export const EDIT_FRIEND_FAILED = 'EDIT_FRIENDS_FAILED';
+export const OPEN_EDIT = 'OPEN_EDIT';
 
 export const getFriends = () => dispatch => {
   dispatch({
@@ -66,6 +70,33 @@ export const addFriend = friend => dispatch => {
     .catch(err =>
       dispatch({
         type: ADD_FRIENDS_FAILED,
+        error: 'request failed'
+      })
+    );
+};
+
+export const openEdit = id => {
+  return {
+    type: OPEN_EDIT,
+    payload: id
+  };
+};
+
+export const editFriend = (friend, id) => dispatch => {
+  dispatch({
+    type: EDIT_FRIEND
+  });
+  axios
+    .put(`http://localhost:5000/api/friends/${id}`, friend)
+    .then(res =>
+      dispatch({
+        type: EDIT_FRIEND_COMPLETED,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: EDIT_FRIEND_FAILED,
         error: 'request failed'
       })
     );

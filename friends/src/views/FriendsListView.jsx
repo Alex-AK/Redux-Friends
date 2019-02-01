@@ -14,12 +14,19 @@ export class FriendsListView extends Component {
     this.props.deleteFriend(id);
   };
 
+  openEdit = id => {
+    this.props.history.push('/add-friend');
+  };
+
+  editFriend = id => {};
+
   render() {
     const friendsList = this.props.friends.map(friend => (
       <FriendCard
         key={friend.id}
         friend={friend}
         deleteFriend={this.deleteFriend}
+        openEdit={this.openEdit}
       />
     ));
 

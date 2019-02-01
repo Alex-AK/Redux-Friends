@@ -11,6 +11,7 @@ class FriendFormView extends Component {
         <FriendForm
           addFriend={this.props.addFriend}
           history={this.props.history}
+          isEditing={this.props.isEditing}
         />
       </div>
     );
@@ -19,7 +20,8 @@ class FriendFormView extends Component {
 
 const mapStateToProps = state => {
   return {
-    friends: state.friends
+    friends: state.friends,
+    isEditing: state.isEditing
   };
 };
 
