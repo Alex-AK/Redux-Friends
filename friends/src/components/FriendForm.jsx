@@ -4,10 +4,16 @@ class FriendsForm extends Component {
   state = {
     friend: {
       name: '',
-      age: '',
+      age: undefined,
       email: ''
     }
   };
+
+  componentDidMount() {
+    this.setState({
+      friend: this.props.activeEdit
+    });
+  }
 
   handleChange = e => {
     this.setState({
@@ -18,16 +24,10 @@ class FriendsForm extends Component {
     });
   };
 
-  addFriend = e => {
-    e.preventDefault();
-    this.props.addFriend(this.state.friend);
-    this.props.history.push('/');
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.isEditing
-      ? this.props.editFriend(this.state.friend, this.props.friend.id)
+      ? this.props.editFriend(this.state.friend)
       : this.props.addFriend(this.state.friend);
     this.props.history.push('/');
   };
@@ -45,7 +45,7 @@ class FriendsForm extends Component {
           minLength="2"
         />
         <input
-          type="number"
+          type="text"
           placeholder="Age"
           name="age"
           value={this.state.friend.age}

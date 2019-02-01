@@ -7,7 +7,10 @@ const FriendCard = props => {
       <p>Age: {props.friend.age}</p>
       <p>Email: {props.friend.email}</p>
       <div className="buttons">
-        <button className="button" onClick={props.openEdit}>
+        <button
+          className="button"
+          onClick={() => props.openEdit(props.friend.id)}
+        >
           Edit
         </button>
         <button
