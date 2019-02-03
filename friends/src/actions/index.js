@@ -75,19 +75,16 @@ export const addFriend = friend => dispatch => {
     );
 };
 
-export const openEdit = id => {
+export const openEdit = friend => {
   return {
     type: OPEN_EDIT,
-    payload: id
+    payload: friend
   };
 };
 
-export const editFriend = (friend, id) => dispatch => {
-  dispatch({
-    type: EDIT_FRIEND
-  });
+export const editFriend = friend => dispatch => {
   axios
-    .put(`http://localhost:5000/api/friends/${id}`, friend)
+    .put(`http://localhost:5000/api/friends/${friend.id}`, friend)
     .then(res =>
       dispatch({
         type: EDIT_FRIEND_COMPLETED,

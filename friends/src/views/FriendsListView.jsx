@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getFriends, deleteFriend } from '../actions';
+import { getFriends, deleteFriend, openEdit } from '../actions';
 
 import FriendCard from '../components/FriendCard';
 
@@ -15,10 +15,10 @@ export class FriendsListView extends Component {
   };
 
   openEdit = id => {
+    const selected = this.props.friends.find(friend => friend.id === id);
     this.props.history.push('/add-friend');
+    this.props.openEdit(selected);
   };
-
-  editFriend = id => {};
 
   render() {
     const friendsList = this.props.friends.map(friend => (
@@ -27,6 +27,8 @@ export class FriendsListView extends Component {
         friend={friend}
         deleteFriend={this.deleteFriend}
         openEdit={this.openEdit}
+        isEditing={this.isEditing}
+        activeEdit={this.activeEdit}
       />
     ));
 
@@ -35,11 +37,10 @@ export class FriendsListView extends Component {
 }
 
 const mapStateToProps = state => ({
-  friends: state.friends,
-  isLoading: state.isLoading
+  friends: state.friends
 });
 
 export default connect(
   mapStateToProps,
-  { getFriends, deleteFriend }
+  { getFriends, deleteFriend, openEdit }
 )(FriendsListView);
